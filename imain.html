@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎉</title>
+    <style>
+        :root {
+            --color-pink: #FF1493;
+            --color-hot-pink: #FF69B4;
+            --color-light-pink: #FFB6C1;
+            --color-plum: #DDA0DD;
+            --color-orchid: #BA55D3;
+            --color-purple: #9370DB;
+            --color-sky-blue: #87CEEB;
+            --color-turquoise: #00CED1;
+            --color-gold: #FFD700;
+            --color-tomato: #FF6347;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                var(--color-pink),
+                var(--color-orchid),
+                var(--color-purple),
+                var(--color-sky-blue),
+                var(--color-turquoise),
+                var(--color-gold),
+                var(--color-hot-pink)
+            );
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            z-index: 1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .banner {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            font-size: 3rem;
+            z-index: 15;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-15px); }
+        }
+
+        .main-message {
+            text-align: center;
+            z-index: 15;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(45deg,
+                #FFD700,
+                #FF69B4,
+                #BA55D3,
+                #87CEEB,
+                #00CED1,
+                #FFD700
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite, gradientText 3s ease infinite;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+                         0 0 30px rgba(255, 105, 180, 0.6);
+            animation: glow 2s ease-in-out infinite;
+            font-weight: 600;
+            max-width: 90%;
+            padding: 0 20px;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 105, 180, 0.6); }
+            50% { text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 50px rgba(255, 105, 180, 0.9); }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 5;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0.8;
+            }
+        }
+
+        .balloon {
+            position: fixed;
+            bottom: -100px;
+            width: 50px;
+            height: 60px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            z-index: 5;
+            animation: float linear infinite;
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(var(--drift));
+                opacity: 0.5;
+            }
+        }
+
+        .star {
+            position: fixed;
+            z-index: 5;
+            font-size: 1.5rem;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .heart {
+            position: fixed;
+            z-index: 5;
+            font-size: 2rem;
+            animation: heartBeat 3s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .emoji-decoration {
+            position: absolute;
+            font-size: 2.5rem;
+            z-index: 12;
+            animation: rotate3d 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate3d {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .music-control:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .banner {
+                font-size: 2rem;
+                top: 20px;
+            }
+
+            .emoji-decoration {
+                font-size: 1.5rem;
+            }
+
+            .music-control {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="banner">
+        <span>🎉</span>
+        <span>🎊</span>
+        <span>🎈</span>
+    </div>
+
+    <div class="container">
+        <div class="main-message">
+            <h1>HAPPY BIRTHDAY DHARSHAN</h1>
+            <p class="subtitle">Wishing you joy, happiness, and unforgettable moments!</p>
+        </div>
+    </div>
+
+    <div class="music-control" id="musicControl" title="Play/Pause Music">
+        🎵
+    </div>
+
+    <audio id="birthdayMusic" autoplay loop>
+        <source src="happy-birthday-314197.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="clickHereButton">Click here</button>
+
+    <script>
+        document.getElementById('clickHereButton').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+
+    <script>
+        // Create confetti
+        const colors = ['#FF1493', '#FF69B4', '#FFB6C1', '#DDA0DD', '#BA55D3', '#9370DB', '#87CEEB', '#00CED1', '#FFD700', '#FF6347'];
+        const confettiCount = 25;
+        const balloonCount = 8;
+        const starCount = 15;
+        const heartCount = 10;
+
+        function createConfetti() {
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.width = (Math.random() * 5 + 8) + 'px';
+                confetti.style.height = (Math.random() * 5 + 8) + 'px';
+                
+                const shape = Math.random();
+                if (shape > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                }
+                
+                document.body.appendChild(confetti);
+            }
+        }
+
+        function createBalloons() {
+            for (let i = 0; i < balloonCount; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + '%';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (Math.random() * 2 + 4) + 's';
+                balloon.style.animationDelay = Math.random() * 3 + 's';
+                balloon.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+                
+                document.body.appendChild(balloon);
+            }
+        }
+
+        function createStars() {
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = '⭐';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDuration = (Math.random() + 1) + 's';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.body.appendChild(star);
+            }
+        }
+
+        function createHearts() {
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '💝';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                heart.style.animationDelay = Math.random() * 3 + 's';
+                
+                document.body.appendChild(heart);
+            }
+        }
+
+        function createEmojiDecorations() {
+            const emojis = ['🎁', '🎊', '💝', '🎈'];
+            const positions = [
+                { top: '15%', left: '10%' },
+                { top: '20%', right: '10%' },
+                { bottom: '20%', left: '15%' },
+                { bottom: '15%', right: '15%' }
+            ];
+
+            positions.forEach((pos, index) => {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji-decoration';
+                emoji.textContent = emojis[index % emojis.length];
+                emoji.style.animationDelay = (index * 0.5) + 's';
+                
+                Object.keys(pos).forEach(key => {
+                    emoji.style[key] = pos[key];
+                });
+                
+                document.body.appendChild(emoji);
+            });
+        }
+
+        // Music control
+        let isPlaying = false;
+        const musicControl = document.getElementById('musicControl');
+        const audio = document.getElementById('birthdayMusic');
+
+        musicControl.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                musicControl.textContent = '🔇';
+                musicControl.style.animation = 'none';
+            } else {
+                audio.play();
+                musicControl.textContent = '🎵';
+                musicControl.style.animation = 'pulse 0.5s ease-in-out infinite';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Initialize all elements
+        window.addEventListener('load', () => {
+            createConfetti();
+            createBalloons();
+            createStars();
+            createHearts();
+            createEmojiDecorations();
+        });
+
+        // Add continuous confetti and balloon creation
+        setInterval(() => {
+            createConfetti();
+        }, 8000);
+
+        setInterval(() => {
+            createBalloons();
+        }, 12000);
+    </script>
+</body>
+</html>
